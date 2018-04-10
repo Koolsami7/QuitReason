@@ -1,0 +1,5 @@
+name: QuitReason
+main: host.sami.quitreason.Main
+version: 1.0
+description: >
+             QuitReason by Koolsami7
