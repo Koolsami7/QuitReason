@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.JSONObject;
@@ -121,10 +122,8 @@ public class Main extends JavaPlugin implements Listener {
 	    		msg = msg.replaceAll("&", ""+ChatColor.COLOR_CHAR);
 	    		
 	    		// Broadcast final join message 
-	    		if (!msg.equalsIgnoreCase("none")) Bukkit.broadcastMessage(msg);
+        		if (!msg.equalsIgnoreCase("none")) e.setJoinMessage(msg);
 		} catch (Exception ex) {
-			// Backup join message in-case error occurs above
-			Bukkit.broadcastMessage(ChatColor.YELLOW + e.getPlayer().getName() + " joined the game");
 			getLogger().log(Level.SEVERE, "Error reading IP lookup API. Using default join message.");
 		}
 	}
@@ -157,11 +156,9 @@ public class Main extends JavaPlugin implements Listener {
 	        		msg = msg.replaceAll("&", ""+ChatColor.COLOR_CHAR);
 	        		
 	        		// Broadcast final quit message
-	        		if (!msg.equalsIgnoreCase("none")) Bukkit.broadcastMessage(msg);
+	        		if (!msg.equalsIgnoreCase("none")) e.setQuitMessage(msg);
 	        }
 		} catch (Exception ex) {
-			// Backup quit message in-case error occurs above
-			Bukkit.broadcastMessage(ChatColor.YELLOW + e.getPlayer().getName() + " left the game");
 			getLogger().log(Level.SEVERE, "Error reading '" + path + "'. Using default quit message.");
 		}
 	}
